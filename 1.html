@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            margin: 0;
+
+        }
+
+        header {
+
+            color: white;
+        }
+
+        .flexcontainer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 30px;
+
+
+        }
+
+
+
+        .a a {
+            text-decoration: none;
+            color: white;
+            margin: 4px;
+        }
+
+        .a a:hover {
+            color: gold;
+        }
+
+        .a {
+            margin-top: 5px;
+        }
+
+        .flexcontainer a {
+            font-size: 20px;
+        }
+
+        @import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+        @import url('https://fonts.cdnfonts.com/css/poppins');
+
+        .banner {
+            width: 100%;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner .slider {
+            position: absolute;
+            width: 200px;
+            height: 250px;
+            top: 10%;
+            left: calc(50% - 100px);
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            animation: autoRun 20s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes autoRun {
+            from {
+                transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+            }
+
+            to {
+                transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+            }
+        }
+
+        .banner .slider .item {
+            position: absolute;
+            inset: 0 0 0 0;
+            transform:
+                rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(550px);
+        }
+
+        .banner .slider .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner .content {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1400px, 100vw);
+            height: max-content;
+            padding-bottom: 100px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .banner .content h1 {
+            font-family: 'ICA Rubrik';
+            font-size: 16em;
+            line-height: 1em;
+            color: #25283B;
+            position: relative;
+        }
+
+        .banner .content h1::after {
+            position: absolute;
+            inset: 0 0 0 0;
+            content: attr(data-content);
+            z-index: 2;
+            -webkit-text-stroke: 2px #d2d2d2;
+            color: transparent;
+        }
+
+        .banner .content .author {
+            font-family: Poppins;
+            text-align: right;
+            max-width: 200px;
+        }
+
+        .banner .content h2 {
+            font-size: 3em;
+        }
+
+        .banner .content .model {
+            background-image: url(model.png);
+            width: 100%;
+            height: 75vh;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-size: auto 130%;
+            background-repeat: no-repeat;
+            background-position: top center;
+            z-index: 1;
+        }
+
+        @media screen and (max-width: 1023px) {
+            .banner .slider {
+                width: 160px;
+                height: 200px;
+                left: calc(50% - 80px);
+            }
+
+            .banner .slider .item {
+                transform:
+                    rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
+            }
+
+            .banner .content h1 {
+                text-align: center;
+                width: 100%;
+                text-shadow: 0 10px 20px #000;
+                font-size: 7em;
+            }
+
+            .banner .content .author {
+                color: #fff;
+                padding: 20px;
+                text-shadow: 0 10px 20px #000;
+                z-index: 2;
+                max-width: unset;
+                width: 100%;
+                text-align: center;
+                padding: 0 30px;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .banner .slider {
+                width: 100px;
+                height: 150px;
+                left: calc(50% - 50px);
+            }
+
+            .banner .slider .item {
+                transform:
+                    rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px);
+            }
+
+            .banner .content h1 {
+                font-size: 5em;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: arial;
+        }
+
+        body {
+            background-color: black;
+            background-image:
+                repeating-linear-gradient(to right, transparent 0 100px,
+                    #25283b22 100px 101px),
+                repeating-linear-gradient(to bottom, transparent 0 100px,
+                    #25283b22 100px 101px);
+        }
+
+        body::before {
+            position: absolute;
+            width: min(1400px, 90vw);
+            top: 10%;
+            left: 50%;
+            height: 90%;
+            transform: translateX(-50%);
+            content: '';
+            background-image: url(bg.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: top center;
+            pointer-events: none;
+        }
+
+        .next {
+            display: flex;
+            justify-content: space-between;
+            background-color: gainsboro;
+            color: black;
+            font-size: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+
+        }
+
+        .brandname {
+            color: wheat;
+            font-size: 40px;
+
+        }
+
+
+
+        .fav {
+            width: 100%;
+            padding: 20px;
+            margin: 100px auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+
+        }
+
+        .sfav {
+            width: 250px;
+            margin: 0 10px;
+            box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+            transition: 1s;
+        }
+
+        .sfav img {
+            display: block;
+            width: 100%;
+            border-radius: 5px;
+
+        }
+
+        .sfav:hover {
+            transform: scale(1.3);
+            z-index: 2;
+
+        }
+
+        .nfav {
+            width: 100%;
+            padding: 20px;
+            margin: 100px auto;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .afav {
+            width: 250px;
+            margin: 0 10px;
+            box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+            transition: 1s;
+        }
+
+        .afav img {
+            display: block;
+            width: 100%;
+            border-radius: 5px;
+
+        }
+
+        .afav:hover {
+            transform: scale(1.3);
+            z-index: 2;
+        }
+
+        .fallfav h1 {
+            text-align: center;
+            color: wheat;
+            font-size: 50px;
+            transition: 1s ease-in-out 0s;
+            transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+
+        }
+
+        .brandname {
+            position: relative;
+
+        }
+
+        .brandname:hover {
+            color: yellow;
+        }
+
+        .brandname::before {
+            content: '';
+            position: absolute;
+            display: block;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: blue;
+            border-radius: 20px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+            transform-origin: left;
+
+
+        }
+
+        .brandname:hover::before {
+            transform: scaleX(1);
+            transform-origin: right;
+        }
+
+        .fallfav h1 {
+            position: relative;
+
+
+        }
+
+        .fallfav h1::before {
+            content: '';
+            position: absolute;
+            display: block;
+            top: 50px;
+            bottom: 0;
+            right: 50px;
+            left: 50px;
+            background: blue;
+            border-radius: 20px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            z-index: -1;
+            transform-origin: left;
+        }
+
+        .fallfav h1:hover::before {
+            transform: scaleX(1);
+            transform-origin: right;
+        }
+
+        .fallfav h1:hover {
+            color: yellow;
+        }
+
+        .a {
+            margin-right: 50px;
+
+        }
+
+        .a a {
+            color: white;
+        }
+
+        .page4 table td,
+        tr,
+        th {
+            color: white;
+            border: 5px solid white;
+
+            text-align: center;
+            font-size: 30px;
+
+            padding: 10px;
+            width: fit-content;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+
+
+
+        }
+
+        .page4 table {
+            border-collapse: collapse;
+            width: 100%;
+
+
+
+        }
+
+        .page4 table td img {
+            margin-top: 20px;
+            width: fit-content;
+            height: 300px;
+            margin: 50px;
+            border: 5px solid gold;
+        }
+
+        footer {
+            color: white;
+        }
+
+        .last a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .last {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            margin-right: 150px;
+            margin-left: 150px;
+
+        }
+
+        .review {
+            font-size: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .next p {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .sublast2 p {
+            font-size: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .number {
+            font-size: 20px;
+        }
+
+        .sublast2 ul {
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .sublast2 {
+            border: 2px solid white;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .sublast1 {
+            border: 2px solid white;
+            padding: 20px;
+            text-align: center;
+            width: 500px;
+        }
+        .sublast3 {
+            border: 2px solid white;
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+            
+        }
+        .sublast2 p{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .sublast3 p{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .stay{
+            font-size: 20px;
+        }
+        .tunedlist p{
+            margin-top: 20px;
+           
+        }
+        .tunedlist ul li{
+            font-size: 20px; 
+        }
+        .bottom1{
+            background-color: white;
+            color: black;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+            height :30px;
+            padding-top: 7px;
+            border-radius: 20px;
+            
+        }
+        .bottom1 p{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="flexcontainer">
+                <div class="a">
+                    <b class="brandname"> GARDEN OF GIFTS </b>
+                </div>
+                <div class="a">
+                    <a href="">HOME</a>
+                    <a href="FLOWERS.html">FLOWERS</a>
+                    <a href="#table">COLLECTIONS</a>
+                    <a href="#fallfavourites">BEST SELLERS</a>
+
+
+                </div>
+                <div class="a">
+                    <abbr title="LOG IN"><a href="userlogin.html"><i class="fa-solid fa-user"></i></a></abbr>
+                    <abbr title="SEARCH"><a href=''><i class="fa-solid fa-magnifying-glass"></i></a></abbr>
+                    <abbr title="WISHLIST"><a href=""><i class="fa-solid fa-heart"></i></a></abbr><abbr title="CART"><a
+                            href=''><i class="fa-solid fa-cart-shopping"></i></a></abbr>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <div class="slider" style="--quantity: 10">
+            <div class="item" style="--position: 1"><img src="/END PROJECT/END PROJECT/1.avif" alt="">
+            </div>
+            <div class="item" style="--position: 2"><img src="/END PROJECT/END PROJECT/2.avif" alt="">
+            </div>
+            <div class="item" style="--position: 3"><img src="/END PROJECT/END PROJECT/2.jpeg" alt="">
+            </div>
+            <div class="item" style="--position: 4"><img src="/END PROJECT/END PROJECT//3.avif" alt="">
+            </div>
+            <div class="item" style="--position: 5"><img src="/END PROJECT/END PROJECT//4.webp" alt="">
+            </div>
+            <div class="item" style="--position: 6"><img src="/END PROJECT/END PROJECT//5.webp" alt="">
+            </div>
+            <div class="item" style="--position: 7"><img src="/END PROJECT/END PROJECT//6.jpeg" alt="">
+            </div>
+            <div class="item" style="--position: 8"><img src="/END PROJECT/END PROJECT//8.jpeg" alt="">
+            </div>
+            <div class="item" style="--position: 9"><img src="/END PROJECT/END PROJECT//4.webp" alt="">
+            </div>
+            <div class="item" style="--position: 10"><img src="/END PROJECT/END PROJECT//2.avif" alt="">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="next" id="page4">
+
+        <div class="nextb">
+            <p> <i class="fa-regular fa-face-smile"></i><br>LASTS ATLEAST 3+ YEARS</p>
+
+        </div>
+        <div class="nextc">
+            <p> <i class="fa-solid fa-leaf"></i><br>SUSTAINABLE LUXURY</p>
+        </div>
+        <div class="nextd">
+            <p><i class="fa-regular fa-star"></i><br>10000+ SATISFIED REVIEWS</p>
+        </div>
+        <div class="a">
+            <p><i class="fa-regular fa-heart"></i><br>TOP 1% FINE SELECTED REAL FLOWER'S</p>
+        </div>
+
+    </div>
+
+    <div class="fallfav" id="fallfavourites">
+        <h1><br>FALL FAVOURITES</h1>
+        <div class="fav">
+            <div class="sfav"><img src="/END PROJECT/END PROJECT/31.avif" alt=""></div>
+            <div class="sfav"><img src="/END PROJECT/END PROJECT/32.avif" alt=""></div>
+            <div class="sfav"><img src="/END PROJECT/END PROJECT/33.avif" alt=""></div>
+            <div class="sfav"><img src="/END PROJECT/END PROJECT/114.avif" alt=""></div>
+            <div class="sfav"><img src="/END PROJECT/END PROJECT/103.jpg" alt=""></div>
+
+
+        </div>
+
+        <div class="nfav">
+            <div class="afav"><img src="/END PROJECT/END PROJECT/115.avif" alt=""></div>
+            <div class="afav"><img src="/END PROJECT/END PROJECT/25.avif" alt=""></div>
+            <div class="afav"><img src="/END PROJECT/END PROJECT/27.avif" alt=""></div>
+            <div class="afav"><img src="/END PROJECT/END PROJECT/113.avif" alt=""></div>
+            <div class="afav"><img src="/END PROJECT/END PROJECT/112.avif" alt=""></div>
+        </div>
+
+    </div>
+
+    <div class="page4">
+        <table id="table">
+            <tr>
+                <th>Types Of Bouquets</th>
+                <th>Prices (in Rs.)</th>
+            </tr>
+            <tr>
+                <td><img src="/END PROJECT/END PROJECT/100.jpg" alt=""> <img
+                        src="/END PROJECT/END PROJECT/101.jpg" alt=""> <img
+                        src="/END PROJECT/END PROJECT/110.jpg" alt=""></td>
+                <td>1200 <br>
+                    (each)</td>
+            </tr>
+            <tr>
+                <td> <img src="/END PROJECT/END PROJECT//104.jpg" alt=""> <img
+                        src="/END PROJECT/END PROJECT/102.jpg" alt=""> <img
+                        src="/END PROJECT/END PROJECT/109.jpg" alt=""></td>
+                <td>2000 <br>(each)</td>
+
+            </tr>
+            <tr>
+                <td> <img src="/END PROJECT/END PROJECT/107.jpg" alt=""> <img
+                        src="/END PROJECT/END PROJECT/25.avif" alt=""> <img
+                        src="/END PROJECT/END PROJECT/27.avif" alt=""></td>
+                <td>1500 <br>(each)</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <footer>
+        <div class="last">
+            <div class="sublast1">
+                <span class="review"><u> LEAVE A REVIEW</u> : </span><br><br><textarea name="" id="" cols="50" rows="5"
+                    placeholder="tell us about your experience...."></textarea>
+                    <br> <br>
+                    <p>CONTACT NO. - 2542245967</p>
+                    <p>EMAIL -  <a href="">gardenofgifts@gmail.com</a></p>
+            </div>
+            <div class="sublast2">
+
+                <p>FOLLOW US</p>
+                <p><ul>
+                    <li>
+                        <i class="fa-brands fa-facebook"></i> <a href=""> FACEBOOK</a>
+                    </li>
+                    <li><i class="fa-brands fa-twitter"></i><a href=""> TWITTER</a></li>
+                    <li><i class="fa-brands fa-instagram"></i> <a href=""> INSTAGRAM</a> </li>
+                    <li><i class="fa-brands fa-linkedin"></i> <a href=""> LINKEDIN</a> </li>
+
+                    <li><i class="fa-brands fa-youtube"></i> <a href=""> YOUTUBE</a> </li>
+
+                </ul></p>
+            </div>
+            <div class="sublast3">
+                <div class="D">
+                    <span class="stay"><p>STAY UPDTAED</p></span>
+                   <span class="tunedlist"> <p><ul>
+                        <li>NEWSLETTER</li>
+                        <li>BLOG</li>
+                        <li>WEBINARS</li>
+                        <li>EVENTS</li>
+                        <li>FAQ's</li>
+                    </ul></p></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom1">
+            <p><i class="fa-regular fa-copyright"></i> 2024 GARDEN OF GIFTS . ALL RIGHTS RESERVED</p>
+
+        </div>
+    </footer>
+
+
+
+
+</body>
+
+</html>
